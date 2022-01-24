@@ -18,14 +18,14 @@ async function main() {
 
     [standardEmbed, ILSIEmbed] = await getMsg();
 
-    standardMsg = await channel.send({ embeds: [standardEmbed] });
-    ILSImsg = await channel.send({ embeds: [ILSIEmbed] });
+    standardMsg = await channel.send(standardEmbed);
+    ILSImsg = await channel.send(ILSIEmbed);
 
     while (1) {
       [standardEmbed, ILSIEmbed] = await getMsg();
 
-      standardMsg.edit({ embeds: [standardEmbed] });
-      ILSImsg.edit({ embeds: [ILSIEmbed] });
+      standardMsg.edit(standardEmbed);
+      ILSImsg.edit(ILSIEmbed);
 
       await sleep(60 * 1000);
     }
@@ -47,101 +47,152 @@ const getMsg = async () => {
   ] = await getData();
 
   const standardEmbed = {
-    type: "rich",
-    title: `STANDARD`,
-    url: "https://www.coingecko.com/en/coins/stakeborg-dao",
-    thumbnail: {
-      url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`,
-      height: 50,
-      width: 50
-    },
-    description: "",
-    color: 0x0095ff,
-    fields: [
+    components: [
       {
-        name: "Price",
-        value: `**${new Intl.NumberFormat().format(standard_price)}$**`,
-        inline: true
-      },
+        type: 1,
+        components: [
+          {
+            style: 5,
+            label: `Coingecko`,
+            url: `https://www.coingecko.com/en/coins/stakeborg-dao`,
+            disabled: false,
+            type: 2
+          }
+        ]
+      }
+    ],
+    embeds: [
       {
-        name: "\u200B",
-        value: `**${standard_price_change.toFixed(2)}%** in last 24h`,
-        inline: true
-      },
-      {
-        name: `\u200B`,
-        value: "\u200B",
-        inline: true
-      },
-      {
-        name: `Market Cap`,
-        value: `**${new Intl.NumberFormat().format(standard_marketcap)}$**`,
-        inline: true
-      },
-      {
-        name: "\u200B",
-        value: `**${standard_marketcap_change.toFixed(2)}%** in last 24h`,
-        inline: true
-      },
-      {
-        name: `\u200B`,
-        value: "\u200B",
-        inline: true
-      },
-      {
-        name: `Circulating supply`,
-        value: `${new Intl.NumberFormat().format(
-          standard_supply.toFixed(0)
-        )} (${((standard_supply / 20000000) * 100).toFixed(2)}% of total)`
+        type: "rich",
+        title: `STANDARD`,
+        url: "https://www.coingecko.com/en/coins/stakeborg-dao",
+        thumbnail: {
+          url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`,
+          height: 50,
+          width: 50
+        },
+        description: "",
+        color: 0x0095ff,
+        timestamp: new Date(),
+        fields: [
+          {
+            name: "Price",
+            value: `\`${new Intl.NumberFormat().format(standard_price)}$\``,
+            inline: true
+          },
+          {
+            name: "\u200B",
+            value: `\`${standard_price_change.toFixed(2)}%\` in last 24h`,
+            inline: true
+          },
+          {
+            name: `\u200B`,
+            value: "\u200B",
+            inline: true
+          },
+          {
+            name: `Market Cap`,
+            value: `\`${new Intl.NumberFormat().format(standard_marketcap)}$\``,
+            inline: true
+          },
+          {
+            name: "\u200B",
+            value: `\`${standard_marketcap_change.toFixed(2)}%\` in last 24h`,
+            inline: true
+          },
+          {
+            name: `\u200B`,
+            value: "\u200B",
+            inline: true
+          },
+          {
+            name: `Circulating supply`,
+            value: `\`${new Intl.NumberFormat().format(
+              standard_supply.toFixed(0)
+            )}\` (\`${((standard_supply / 20000000) * 100).toFixed(
+              2
+            )}%\` of total)`
+          }
+        ],
+        footer: {
+          text: `One for all and all for DAO ❤️`,
+          icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`
+        }
       }
     ]
   };
 
   const ILSIEmbed = {
-    type: "rich",
-    title: `ILSI`,
-    url: "https://www.coingecko.com/en/coins/invest-like-stakeborg-index",
-    thumbnail: {
-      url: `https://assets.coingecko.com/coins/images/21788/small/16292.png?1640048590`,
-      height: 50,
-      width: 50
-    },
-    description: "",
-    color: 0x0095ff,
-    fields: [
+    components: [
       {
-        name: `Price`,
-        value: `**${new Intl.NumberFormat().format(ilsi_price)}$**`,
-        inline: true
-      },
+        type: 1,
+        components: [
+          {
+            style: 5,
+            label: `Coingecko`,
+            url: `https://www.coingecko.com/en/coins/invest-like-stakeborg-index`,
+            disabled: false,
+            type: 2
+          }
+        ]
+      }
+    ],
+    embeds: [
       {
-        name: "\u200B",
-        value: `**${ilsi_price_change.toFixed(2)}%** in last 24h`,
-        inline: true
-      },
-      {
-        name: `\u200B`,
-        value: "\u200B",
-        inline: true
-      },
-      {
-        name: `Market Cap`,
-        value: `**${new Intl.NumberFormat().format(ilsi_marketcap)}$**`,
-        inline: true
-      },
-      {
-        name: "\u200B",
-        value: `**${ilsi_marketcap_change.toFixed(2)}%** in last 24h`,
-        inline: true
-      },
-      {
-        name: `\u200B`,
-        value: "\u200B",
-        inline: true
-      },
-      {
-        name: `Circulating supply`,
-        value: `${new Intl.NumberFormat().format(ilsi_supply.toFixed(0))}`
+        type: "rich",
+        title: `ILSI`,
+        url: "https://www.coingecko.com/en/coins/invest-like-stakeborg-index",
+        thumbnail: {
+          url: `https://assets.coingecko.com/coins/images/21788/small/16292.png?1640048590`,
+          height: 50,
+          width: 50
+        },
+        description: "",
+        color: 0x0095ff,
+        timestamp: new Date(),
+
+        fields: [
+          {
+            name: `Price`,
+            value: `\`${new Intl.NumberFormat().format(ilsi_price)}$\``,
+            inline: true
+          },
+          {
+            name: "\u200B",
+            value: `\`${ilsi_price_change.toFixed(2)}%\` in last 24h`,
+            inline: true
+          },
+          {
+            name: `\u200B`,
+            value: "\u200B",
+            inline: true
+          },
+          {
+            name: `Market Cap`,
+            value: `\`${new Intl.NumberFormat().format(ilsi_marketcap)}$\``,
+            inline: true
+          },
+          {
+            name: "\u200B",
+            value: `\`${ilsi_marketcap_change.toFixed(2)}%\` in last 24h`,
+            inline: true
+          },
+          {
+            name: `\u200B`,
+            value: "\u200B",
+            inline: true
+          },
+          {
+            name: `Circulating supply`,
+            value: `\`${new Intl.NumberFormat().format(
+              ilsi_supply.toFixed(0)
+            )}\``
+          }
+        ],
+        footer: {
+          text: `One for all and all for DAO ❤️`,
+          icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`
+        }
       }
     ]
   };
