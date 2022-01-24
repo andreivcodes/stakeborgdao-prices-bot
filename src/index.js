@@ -14,7 +14,7 @@ async function main() {
   client.on("ready", async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    const channel = client.channels.cache.get("928755445361963071");
+    const channel = client.channels.cache.get("934866573137678436");
 
     [standardEmbed, ILSIEmbed] = await getMsg();
 
