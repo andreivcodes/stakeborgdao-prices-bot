@@ -14,7 +14,7 @@ async function main() {
   client.on("ready", async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    const channel = client.channels.cache.get("934866573137678436");
+    const channel = client.channels.cache.get("928755445361963071");
 
     [standardEmbed, ILSIEmbed] = await getMsg();
 
@@ -71,49 +71,21 @@ const getMsg = async () => {
           height: 50,
           width: 50
         },
-        description: "",
+        description: `**Price**\n\`${new Intl.NumberFormat().format(
+          standard_price
+        )}$\` \u3000 \`${standard_price_change.toFixed(
+          2
+        )}%\` in last 24h \n**Market Cap**\n\`${new Intl.NumberFormat().format(
+          standard_marketcap
+        )}$\` \u3000 \`${standard_marketcap_change.toFixed(
+          2
+        )}%\` in last 24h \n**Circulating supply**\n\`${new Intl.NumberFormat().format(
+          standard_supply.toFixed(0)
+        )}\` (\`${((standard_supply / 20000000) * 100).toFixed(
+          2
+        )}%\` of total)`,
         color: 0x0095ff,
         timestamp: new Date(),
-        fields: [
-          {
-            name: "Price",
-            value: `\`${new Intl.NumberFormat().format(standard_price)}$\``,
-            inline: true
-          },
-          {
-            name: "\u200B",
-            value: `\`${standard_price_change.toFixed(2)}%\` in last 24h`,
-            inline: true
-          },
-          {
-            name: `\u200B`,
-            value: "\u200B",
-            inline: true
-          },
-          {
-            name: `Market Cap`,
-            value: `\`${new Intl.NumberFormat().format(standard_marketcap)}$\``,
-            inline: true
-          },
-          {
-            name: "\u200B",
-            value: `\`${standard_marketcap_change.toFixed(2)}%\` in last 24h`,
-            inline: true
-          },
-          {
-            name: `\u200B`,
-            value: "\u200B",
-            inline: true
-          },
-          {
-            name: `Circulating supply`,
-            value: `\`${new Intl.NumberFormat().format(
-              standard_supply.toFixed(0)
-            )}\` (\`${((standard_supply / 20000000) * 100).toFixed(
-              2
-            )}%\` of total)`
-          }
-        ],
         footer: {
           text: `One for all and all for DAO ❤️`,
           icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`
@@ -147,48 +119,19 @@ const getMsg = async () => {
           height: 50,
           width: 50
         },
-        description: "",
+        description: `**Price**\n\`${new Intl.NumberFormat().format(
+          ilsi_price
+        )}$\` \u3000 \`${ilsi_price_change.toFixed(
+          2
+        )}%\` in last 24h \n**Market Cap**\n\`${new Intl.NumberFormat().format(
+          ilsi_marketcap
+        )}$\` \u3000 \`${ilsi_marketcap_change.toFixed(
+          2
+        )}%\` in last 24h \n**Circulating supply**\n\`${new Intl.NumberFormat().format(
+          ilsi_supply.toFixed(0)
+        )}\``,
         color: 0x0095ff,
         timestamp: new Date(),
-
-        fields: [
-          {
-            name: `Price`,
-            value: `\`${new Intl.NumberFormat().format(ilsi_price)}$\``,
-            inline: true
-          },
-          {
-            name: "\u200B",
-            value: `\`${ilsi_price_change.toFixed(2)}%\` in last 24h`,
-            inline: true
-          },
-          {
-            name: `\u200B`,
-            value: "\u200B",
-            inline: true
-          },
-          {
-            name: `Market Cap`,
-            value: `\`${new Intl.NumberFormat().format(ilsi_marketcap)}$\``,
-            inline: true
-          },
-          {
-            name: "\u200B",
-            value: `\`${ilsi_marketcap_change.toFixed(2)}%\` in last 24h`,
-            inline: true
-          },
-          {
-            name: `\u200B`,
-            value: "\u200B",
-            inline: true
-          },
-          {
-            name: `Circulating supply`,
-            value: `\`${new Intl.NumberFormat().format(
-              ilsi_supply.toFixed(0)
-            )}\``
-          }
-        ],
         footer: {
           text: `One for all and all for DAO ❤️`,
           icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`
