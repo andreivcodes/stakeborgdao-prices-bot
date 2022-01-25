@@ -22,7 +22,11 @@ async function main() {
     ILSImsg = await channel.send(ILSIEmbed);
 
     while (1) {
-      [standardEmbed, ILSIEmbed] = await getMsg();
+      try {
+        [standardEmbed, ILSIEmbed] = await getMsg();
+      } catch (e) {
+        console.log(`Err: ${e}`);
+      }
 
       standardMsg.edit(standardEmbed);
       ILSImsg.edit(ILSIEmbed);
