@@ -34,6 +34,11 @@ async function main() {
       await sleep(60 * 1000);
     }
   });
+
+  client.on("error", (error) => {
+    console.log(error);
+    // Do something eg. Log the Error
+  });
 }
 
 const getMsg = async () => {
@@ -47,7 +52,7 @@ const getMsg = async () => {
     ilsi_price_change,
     ilsi_marketcap,
     ilsi_marketcap_change,
-    ilsi_supply
+    ilsi_supply,
   ] = await getData();
 
   const standardEmbed = {
@@ -60,10 +65,10 @@ const getMsg = async () => {
             label: `Coingecko`,
             url: `https://www.coingecko.com/en/coins/stakeborg-dao`,
             disabled: false,
-            type: 2
-          }
-        ]
-      }
+            type: 2,
+          },
+        ],
+      },
     ],
     embeds: [
       {
@@ -73,7 +78,7 @@ const getMsg = async () => {
         thumbnail: {
           url: `https://s2.coinmarketcap.com/static/img/coins/64x64/14210.png`,
           height: 50,
-          width: 50
+          width: 50,
         },
         description: `**Price**\n\`${new Intl.NumberFormat().format(
           standard_price
@@ -92,10 +97,10 @@ const getMsg = async () => {
         timestamp: new Date(),
         footer: {
           text: `One for all and all for DAO ❤️`,
-          icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`
-        }
-      }
-    ]
+          icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`,
+        },
+      },
+    ],
   };
 
   const ILSIEmbed = {
@@ -108,10 +113,10 @@ const getMsg = async () => {
             label: `Coingecko`,
             url: `https://www.coingecko.com/en/coins/invest-like-stakeborg-index`,
             disabled: false,
-            type: 2
-          }
-        ]
-      }
+            type: 2,
+          },
+        ],
+      },
     ],
     embeds: [
       {
@@ -121,7 +126,7 @@ const getMsg = async () => {
         thumbnail: {
           url: `https://s2.coinmarketcap.com/static/img/coins/64x64/16292.png`,
           height: 50,
-          width: 50
+          width: 50,
         },
         description: `**Price**\n\`${new Intl.NumberFormat().format(
           ilsi_price
@@ -138,10 +143,10 @@ const getMsg = async () => {
         timestamp: new Date(),
         footer: {
           text: `One for all and all for DAO ❤️`,
-          icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`
-        }
-      }
-    ]
+          icon_url: `https://assets.coingecko.com/coins/images/20119/small/stquY-WB_400x400.jpg?1636522705`,
+        },
+      },
+    ],
   };
   return [standardEmbed, ILSIEmbed];
 };
@@ -206,7 +211,7 @@ const getData = async () => {
     ilsi_price_change,
     ilsi_marketcap,
     ilsi_marketcap_change,
-    ilsi_supply
+    ilsi_supply,
   ];
 };
 
