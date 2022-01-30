@@ -6,7 +6,10 @@ require("dotenv").config();
 let standardMsg, ILSImsg;
 
 async function main() {
-  const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+  const client = new Client({
+    intents: [Intents.FLAGS.GUILDS],
+    autoReconnect: true,
+  });
 
   console.log("Log in");
   client.login(process.env.TOKEN);
@@ -37,7 +40,6 @@ async function main() {
 
   client.on("error", (error) => {
     console.log(error);
-    // Do something eg. Log the Error
   });
 }
 
