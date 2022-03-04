@@ -78,7 +78,7 @@ const getMsg = async () => {
         title: `STANDARD`,
         url: "https://www.coingecko.com/en/coins/stakeborg-dao",
         thumbnail: {
-          url: `https://s2.coinmarketcap.com/static/img/coins/64x64/14210.png`,
+          url: `https://1985505961-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FJetgnLmkYIvLk8hHmyCV%2Fuploads%2FCb5KDTFg9Qx2AUkAZzE6%2F5-stakeborgdao-medium.png?alt=media&token=4726ed67-1fe3-4091-bce3-77200a915496`,
           height: 50,
           width: 50,
         },
@@ -126,7 +126,7 @@ const getMsg = async () => {
         title: `ILSI`,
         url: "https://www.coingecko.com/en/coins/invest-like-stakeborg-index",
         thumbnail: {
-          url: `https://s2.coinmarketcap.com/static/img/coins/64x64/16292.png`,
+          url: `https://1985505961-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FJetgnLmkYIvLk8hHmyCV%2Fuploads%2FOJulvYt8FoQv5ENGauv8%2F2-ilsi-medium.png?alt=media&token=6ff20747-06c8-4672-9b8f-7572238ac94b`,
           height: 50,
           width: 50,
         },
