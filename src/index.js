@@ -21,11 +21,11 @@ async function main() {
 
     [standardEmbed, ILSIEmbed] = await getMsg();
 
-    let oldStandardmsg = await channel.messages.fetch("953365341415825499");
+    let oldStandardmsg = await channel.messages.fetch("953591618353627136");
     if (oldStandardmsg) standardMsg = oldStandardmsg;
     else standardMsg = await channel.send(standardEmbed);
 
-    let oldILSImsg = await channel.messages.fetch("953365342669926480");
+    let oldILSImsg = await channel.messages.fetch("953591619171516436");
     if (oldILSImsg) ILSImsg = oldILSImsg;
     else ILSImsg = await channel.send(ILSIEmbed);
 
