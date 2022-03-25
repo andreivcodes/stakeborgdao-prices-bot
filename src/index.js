@@ -39,7 +39,7 @@ async function main() {
       standardMsg.edit(standardEmbed);
       ILSImsg.edit(ILSIEmbed);
 
-      await sleep(60 * 1000);
+      await sleep(5 * 60 * 1000);
     }
   });
 
