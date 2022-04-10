@@ -17,17 +17,23 @@ async function main() {
   client.on("ready", async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    const channel = client.channels.cache.get("934866573137678436");
+    const channel = await client.channels.cache.get("934866573137678436");
 
     [standardEmbed, ILSIEmbed] = await getMsg();
 
-    let oldStandardmsg = await channel.messages.fetch("953591618353627136");
-    if (oldStandardmsg) standardMsg = oldStandardmsg;
-    else standardMsg = await channel.send(standardEmbed);
+    try {
+      let oldStandardmsg = await channel.messages.fetch("962731962928336986");
+      standardMsg = oldStandardmsg;
+    } catch (e) {
+      standardMsg = await channel.send(standardEmbed);
+    }
 
-    let oldILSImsg = await channel.messages.fetch("953591619171516436");
-    if (oldILSImsg) ILSImsg = oldILSImsg;
-    else ILSImsg = await channel.send(ILSIEmbed);
+    try {
+      let oldILSImsg = await channel.messages.fetch("962731966745174088");
+      ILSImsg = oldILSImsg;
+    } catch (e) {
+      ILSImsg = await channel.send(ILSIEmbed);
+    }
 
     while (1) {
       try {
@@ -35,6 +41,8 @@ async function main() {
       } catch (e) {
         console.log(`Err: ${e}`);
       }
+
+      console.log("edit msg");
 
       standardMsg.edit(standardEmbed);
       ILSImsg.edit(ILSIEmbed);
