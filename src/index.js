@@ -3,7 +3,7 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 require("dotenv").config();
 
-let standardMsg, ILSImsg;
+let standardMsg, ILSImsg, DAOxmsg;
 
 async function main() {
   const client = new Client({
@@ -19,25 +19,32 @@ async function main() {
 
     const channel = await client.channels.cache.get("934866573137678436");
 
-    [standardEmbed, ILSIEmbed] = await getMsg();
+    [standardEmbed, ILSIEmbed, DAOXEmbed] = await getMsg();
 
     try {
-      let oldStandardmsg = await channel.messages.fetch("962731962928336986");
+      let oldStandardmsg = await channel.messages.fetch("964095926773874708");
       standardMsg = oldStandardmsg;
     } catch (e) {
       standardMsg = await channel.send(standardEmbed);
     }
 
     try {
-      let oldILSImsg = await channel.messages.fetch("962731966745174088");
+      let oldILSImsg = await channel.messages.fetch("964095928460017734");
       ILSImsg = oldILSImsg;
     } catch (e) {
       ILSImsg = await channel.send(ILSIEmbed);
     }
 
+    try {
+      let oldDAOXmsg = await channel.messages.fetch("964095930213204008");
+      DAOXmsg = oldDAOXmsg;
+    } catch (e) {
+      DAOXmsg = await channel.send(DAOXEmbed);
+    }
+
     while (1) {
       try {
-        [standardEmbed, ILSIEmbed] = await getMsg();
+        [standardEmbed, ILSIEmbed, DAOXEmbed] = await getMsg();
       } catch (e) {
         console.log(`Err: ${e}`);
       }
@@ -46,6 +53,7 @@ async function main() {
 
       standardMsg.edit(standardEmbed);
       ILSImsg.edit(ILSIEmbed);
+      DAOXmsg.edit(DAOXEmbed);
 
       await sleep(5 * 60 * 1000);
     }
@@ -68,6 +76,11 @@ const getMsg = async () => {
     ilsi_marketcap,
     ilsi_marketcap_change,
     ilsi_supply,
+    daox_price,
+    daox_price_change,
+    daox_marketcap,
+    daox_marketcap_change,
+    daox_supply,
   ] = await getData();
 
   const standardEmbed = {
@@ -163,7 +176,53 @@ const getMsg = async () => {
       },
     ],
   };
-  return [standardEmbed, ILSIEmbed];
+
+  const DAOXEmbed = {
+    components: [
+      {
+        type: 1,
+        components: [
+          {
+            style: 5,
+            label: `Coingecko`,
+            url: `https://www.coingecko.com/en/coins/the-daox-index`,
+            disabled: false,
+            type: 2,
+          },
+        ],
+      },
+    ],
+    embeds: [
+      {
+        type: "rich",
+        title: `DAOX`,
+        url: "https://www.coingecko.com/en/coins/the-daox-index",
+        thumbnail: {
+          url: `https://1985505961-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FJetgnLmkYIvLk8hHmyCV%2Fuploads%2F39bzMOqx7oH1OAJqc1Ww%2F3-daox-large.png?alt=media&token=9a786c78-f09c-4551-b83f-16a7be897aec`,
+          height: 50,
+          width: 50,
+        },
+        description: `**Price**\n\`${new Intl.NumberFormat().format(
+          daox_price
+        )}$\` \u3000 \`${daox_price_change.toFixed(
+          2
+        )}%\` in last 24h \n**Market Cap**\n\`${new Intl.NumberFormat().format(
+          daox_marketcap
+        )}$\` \u3000 \`${daox_marketcap_change.toFixed(
+          2
+        )}%\` in last 24h \n**Circulating supply**\n\`${new Intl.NumberFormat().format(
+          daox_supply.toFixed(0)
+        )}\``,
+        color: 0x0095ff,
+        timestamp: new Date(),
+        footer: {
+          text: `One for all and all for DAO ❤️`,
+          icon_url: `https://assets.coingecko.com/coins/images/25042/small/200px-DAOx.png?1649911875`,
+        },
+      },
+    ],
+  };
+  return [standardEmbed, ILSIEmbed, DAOXEmbed];
 };
 
 const getData = async () => {
@@ -216,6 +275,30 @@ const getData = async () => {
 
   let ilsi_supply = response["market_data"]["circulating_supply"];
 
+  //DAOX
+  response = await get(
+    "https://api.coingecko.com/api/v3/coins/the-daox-index?market_data=true"
+  );
+  let daox_price = response["market_data"]["current_price"]["usd"];
+  let daox_price_change =
+    response["market_data"]["price_change_percentage_24h_in_currency"]["usd"];
+
+  response = await get(
+    "https://api.coingecko.com/api/v3/coins/the-daox-index?market_data=true"
+  );
+
+  let daox_marketcap = response["market_data"]["market_cap"]["usd"];
+  let daox_marketcap_change =
+    response["market_data"]["market_cap_change_percentage_24h_in_currency"][
+      "usd"
+    ];
+
+  response = await get(
+    "https://api.coingecko.com/api/v3/coins/the-daox-index?market_data=true"
+  );
+
+  let daox_supply = response["market_data"]["circulating_supply"];
+
   return [
     standard_price,
     standard_price_change,
@@ -227,6 +310,11 @@ const getData = async () => {
     ilsi_marketcap,
     ilsi_marketcap_change,
     ilsi_supply,
+    daox_price,
+    daox_price_change,
+    daox_marketcap,
+    daox_marketcap_change,
+    daox_supply,
   ];
 };
 
