@@ -22,21 +22,21 @@ async function main() {
     [standardEmbed, ILSIEmbed, DAOXEmbed] = await getMsg();
 
     try {
-      let oldStandardmsg = await channel.messages.fetch("964095926773874708");
+      let oldStandardmsg = await channel.messages.fetch("968957830063345724");
       standardMsg = oldStandardmsg;
     } catch (e) {
       standardMsg = await channel.send(standardEmbed);
     }
 
     try {
-      let oldILSImsg = await channel.messages.fetch("964095928460017734");
+      let oldILSImsg = await channel.messages.fetch("968957832915468358");
       ILSImsg = oldILSImsg;
     } catch (e) {
       ILSImsg = await channel.send(ILSIEmbed);
     }
 
     try {
-      let oldDAOXmsg = await channel.messages.fetch("964095930213204008");
+      let oldDAOXmsg = await channel.messages.fetch("968957834622558220");
       DAOXmsg = oldDAOXmsg;
     } catch (e) {
       DAOXmsg = await channel.send(DAOXEmbed);
@@ -231,73 +231,76 @@ const getData = async () => {
   let response = await get(
     "https://api.coingecko.com/api/v3/coins/stakeborg-dao?market_data=true"
   );
-  let standard_price = response["market_data"]["current_price"]["usd"];
+  let standard_price = response["market_data"]["current_price"]["usd"] ?? 0;
   let standard_price_change =
-    response["market_data"]["price_change_percentage_24h_in_currency"]["usd"];
+    response["market_data"]["price_change_percentage_24h_in_currency"]["usd"] ??
+    0;
 
   response = await get(
     "https://api.coingecko.com/api/v3/coins/stakeborg-dao?market_data=true"
   );
 
-  let standard_marketcap = response["market_data"]["market_cap"]["usd"];
+  let standard_marketcap = response["market_data"]["market_cap"]["usd"] ?? 0;
   let standard_marketcap_change =
     response["market_data"]["market_cap_change_percentage_24h_in_currency"][
       "usd"
-    ];
+    ] ?? 0;
 
   response = await get(
     "https://api.coingecko.com/api/v3/coins/stakeborg-dao?market_data=true"
   );
 
-  let standard_supply = response["market_data"]["circulating_supply"];
+  let standard_supply = response["market_data"]["circulating_supply"] ?? 0;
 
   //ILSI
   response = await get(
     "https://api.coingecko.com/api/v3/coins/invest-like-stakeborg-index?market_data=true"
   );
-  let ilsi_price = response["market_data"]["current_price"]["usd"];
+  let ilsi_price = response["market_data"]["current_price"]["usd"] ?? 0;
   let ilsi_price_change =
-    response["market_data"]["price_change_percentage_24h_in_currency"]["usd"];
+    response["market_data"]["price_change_percentage_24h_in_currency"]["usd"] ??
+    0;
 
   response = await get(
     "https://api.coingecko.com/api/v3/coins/invest-like-stakeborg-index?market_data=true"
   );
 
-  let ilsi_marketcap = response["market_data"]["market_cap"]["usd"];
+  let ilsi_marketcap = response["market_data"]["market_cap"]["usd"] ?? 0;
   let ilsi_marketcap_change =
     response["market_data"]["market_cap_change_percentage_24h_in_currency"][
       "usd"
-    ];
+    ] ?? 0;
 
   response = await get(
     "https://api.coingecko.com/api/v3/coins/invest-like-stakeborg-index?market_data=true"
   );
 
-  let ilsi_supply = response["market_data"]["circulating_supply"];
+  let ilsi_supply = response["market_data"]["circulating_supply"] ?? 0;
 
   //DAOX
   response = await get(
     "https://api.coingecko.com/api/v3/coins/the-daox-index?market_data=true"
   );
-  let daox_price = response["market_data"]["current_price"]["usd"];
+  let daox_price = response["market_data"]["current_price"]["usd"] ?? 0;
   let daox_price_change =
-    response["market_data"]["price_change_percentage_24h_in_currency"]["usd"];
+    response["market_data"]["price_change_percentage_24h_in_currency"]["usd"] ??
+    0;
 
   response = await get(
     "https://api.coingecko.com/api/v3/coins/the-daox-index?market_data=true"
   );
 
-  let daox_marketcap = response["market_data"]["market_cap"]["usd"];
+  let daox_marketcap = response["market_data"]["market_cap"]["usd"] ?? 0;
   let daox_marketcap_change =
     response["market_data"]["market_cap_change_percentage_24h_in_currency"][
       "usd"
-    ];
+    ] ?? 0;
 
   response = await get(
     "https://api.coingecko.com/api/v3/coins/the-daox-index?market_data=true"
   );
 
-  let daox_supply = response["market_data"]["circulating_supply"];
+  let daox_supply = response["market_data"]["circulating_supply"] ?? 0;
 
   return [
     standard_price,
