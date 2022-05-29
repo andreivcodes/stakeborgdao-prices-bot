@@ -22,21 +22,21 @@ async function main() {
     [standardEmbed, ILSIEmbed, DAOXEmbed] = await getMsg();
 
     try {
-      let oldStandardmsg = await channel.messages.fetch("968957830063345724");
+      let oldStandardmsg = await channel.messages.fetch("980552567396384849");
       standardMsg = oldStandardmsg;
     } catch (e) {
       standardMsg = await channel.send(standardEmbed);
     }
 
     try {
-      let oldILSImsg = await channel.messages.fetch("968957832915468358");
+      let oldILSImsg = await channel.messages.fetch("980552569204121660");
       ILSImsg = oldILSImsg;
     } catch (e) {
       ILSImsg = await channel.send(ILSIEmbed);
     }
 
     try {
-      let oldDAOXmsg = await channel.messages.fetch("968957834622558220");
+      let oldDAOXmsg = await channel.messages.fetch("980552571762659338");
       DAOXmsg = oldDAOXmsg;
     } catch (e) {
       DAOXmsg = await channel.send(DAOXEmbed);
